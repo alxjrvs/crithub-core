@@ -23,3 +23,7 @@ module CrithubCore
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+CrithubCore::Application.config do |c|
+  config.autoload_paths += %W(#{config.root}/app/rules)
+end

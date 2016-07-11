@@ -1,0 +1,37 @@
+{
+  "name": "Human",
+  "type": "Class",
+  "source": "Racial Trait",
+  "mods": [
+    {
+      "modifier": "int",
+      "value": "1",
+      "memo": "Ability Score Increase"
+    },
+    {
+      "modifier": "age_desc",
+      "value": "Humans reach adulthood in their late teens and live less than a century.",
+      "memo": "Age"
+    },
+    {
+      "modifier": "alignment_desc",
+      "value": "Humans tend toward no particular alignment. The best and the worst are found among them.",
+      "memo": "Alignment"
+    },
+    {
+      "modifier": "size",
+      "value": "m",
+      "memo": "Size"
+    },
+    {
+      "modifier": "speed",
+      "value": "30ft",
+      "memo": "Base walking speed"
+    },
+    {
+      "modifier": "language",
+      "value": "common",
+      "memo": "Language"
+    }
+  ]
+}

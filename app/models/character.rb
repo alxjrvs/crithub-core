@@ -18,6 +18,10 @@ class Character < ActiveRecord::Base
   has_many :mods
   has_many :levels
 
+  def digest_json
+    Rules::Races::Human::DATA
+  end
+
   STATS.each do |stat|
     define_method stat do
       numeric_value_for stat
