@@ -18,9 +18,16 @@ class Character < ActiveRecord::Base
   has_many :mods
   has_many :levels
 
-  def modify(hash)
+  def apply(hash)
     hash["mods"].each do |m| 
       digest_mod mod: m, 
+        source: hash["source"]
+    end
+  end
+
+  def remove(hash)
+    hash["mods"].each do |m| 
+      remove_mod mod: m, 
         source: hash["source"]
     end
   end
@@ -71,6 +78,17 @@ class Character < ActiveRecord::Base
   end
 
   private
+
+  def remove_mod(mod:, source:)
+    mod = Mod.find_by(
+      source: source,
+      character: self,
+      value: mod["value"],
+      memo: mod["memo"],
+      modifier: mod["modifier"]
+    )
+    mod.destroy if mod.present?
+  end
 
   def digest_mod(mod:, source:)
     Mod.create(

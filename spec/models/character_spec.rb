@@ -2,15 +2,42 @@ require 'rails_helper'
 
 describe Character do
   let(:character) { create :character }
+  let(:modify_hash) do
+    JSON.parse(File.read("#{Rails.root}/spec/support/test_rule.json"))
+  end
 
+  describe ".remove" do 
 
-  describe "modify" do 
-    let(:modify_hash) do
-      JSON.parse(File.read("#{Rails.root}/spec/support/test_rule.json"))
+    before do
+      modify_hash["mods"].each do |mod|
+        Mod.create(
+          modifier: mod["modifier"],
+          value: mod["value"],
+          memo: mod["memo"],
+          source: modify_hash["source"],
+          character: character,
+        )
+      end
+    end
+    it "correctly removes the given modifiers" do
+      expect{character.remove(modify_hash)}.to change{Mod.count}.by -6
+      modify_hash["mods"].each do |mod|
+        mod = Mod.find_by(
+          modifier: mod["modifier"],
+          value: mod["value"],
+          memo: mod["memo"],
+          source: modify_hash["source"],
+          character: character,
+        )
+        expect(mod).to_not be_present
+      end
     end
 
+  end
+
+  describe ".apply" do 
     it "correctly applies the modifiers" do
-      expect{character.modify(modify_hash)}.to change{Mod.count}.by 6
+      expect{character.apply(modify_hash)}.to change{Mod.count}.by 6
 
       modify_hash["mods"].each do |mod|
         mod = Mod.find_by(
