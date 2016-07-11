@@ -18,8 +18,11 @@ class Character < ActiveRecord::Base
   has_many :mods
   has_many :levels
 
-  def digest_json
-    Rules::Races::Human::DATA
+  def modify(hash)
+    hash["mods"].each do |m| 
+      digest_mod mod: m, 
+        source: hash["source"]
+    end
   end
 
   STATS.each do |stat|
@@ -68,6 +71,16 @@ class Character < ActiveRecord::Base
   end
 
   private
+
+  def digest_mod(mod:, source:)
+    Mod.create(
+      source: source,
+      character: self,
+      value: mod["value"],
+      memo: mod["memo"],
+      modifier: mod["modifier"]
+    )
+  end
 
   def armor
     false

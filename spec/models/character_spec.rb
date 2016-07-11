@@ -2,8 +2,31 @@ require 'rails_helper'
 
 describe Character do
   let(:character) { create :character }
-  Character::STATS.each do |stat|
 
+
+  describe "modify" do 
+    let(:modify_hash) do
+      JSON.parse(File.read("#{Rails.root}/spec/support/test_rule.json"))
+    end
+
+    it "correctly applies the modifiers" do
+      expect{character.modify(modify_hash)}.to change{Mod.count}.by 6
+
+      modify_hash["mods"].each do |mod|
+        mod = Mod.find_by(
+          modifier: mod["modifier"],
+          value: mod["value"],
+          memo: mod["memo"],
+          source: modify_hash["source"],
+          character: character,
+        )
+        expect(mod).to be_present
+      end
+    end
+
+  end
+
+  Character::STATS.each do |stat|
     let(:total) do
       [base_stat, race_trait].
         map(&:value).
