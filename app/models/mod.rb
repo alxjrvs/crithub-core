@@ -1,11 +1,11 @@
 class Mod < ActiveRecord::Base
   BASE_STAT = "Base Stat Roll"
-  FAVORED_CLASS_FEAURE = "Favored Class Feature"
+  CLASS_FEAURE = "Class Feature"
   RACIAL_TRAIT = "Racial Trait" 
 
   ALLOWED_SOURCES = [
     BASE_STAT,
-    FAVORED_CLASS_FEAURE,
+    CLASS_FEAURE,
     RACIAL_TRAIT
   ].freeze
 

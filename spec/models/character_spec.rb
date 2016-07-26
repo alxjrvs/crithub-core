@@ -6,8 +6,16 @@ describe Character do
     JSON.parse(File.read("#{Rails.root}/spec/support/test_rule.json"))
   end
 
-  describe ".remove" do 
+  describe '.regenerate!' do
+    let(:character) { create :character, race: "Human" } 
+    let!(:level) { create :level, number: "1", class_name: "Fighter"}
+    it "regenerates all static modifiers based on race and class" do 
+      expect{character.regenerate!}.to change{Mod.count}
+    end
 
+  end
+
+  describe ".remove" do 
     before do
       modify_hash["mods"].each do |mod|
         Mod.create(
@@ -19,6 +27,7 @@ describe Character do
         )
       end
     end
+
     it "correctly removes the given modifiers" do
       expect{character.remove(modify_hash)}.to change{Mod.count}.by -6
       modify_hash["mods"].each do |mod|

@@ -1,5 +1,5 @@
 class Level < ActiveRecord::Base
   belongs_to :character
-  validates :number, required: true
-  validates :class_name, required: true
+  validates :number, presence: true
+  validates :class_name, presence: true
 end

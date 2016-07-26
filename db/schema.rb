@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711025722) do
+ActiveRecord::Schema.define(version: 20160712024353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20160711025722) do
     t.string  "value"
     t.string  "memo"
     t.string  "source"
+    t.text    "description"
+    t.boolean "dynamic",      default: false
     t.index ["character_id"], name: "index_mods_on_character_id", using: :btree
   end
 

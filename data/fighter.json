@@ -1,0 +1,62 @@
+{
+  "1": {
+    "name":   "Fighter",
+    "type":   "Class",
+    "source": "Class Feature",
+    "mods": [
+      {
+        "modifier": "proficiency_bonus",
+        "value": "2",
+        "memo": "Base Proficiency Bonus"
+      },
+      {
+        "modifier": "class_feature",
+        "value": "Fighting Style",
+        "memo": "Base Proficiency Bonus",
+        "description": "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can’t take a Fighting Style option more than once, even if you later get to choose again."
+      },
+      {
+        "modifier": "class_feature",
+        "value": "Second Wind",
+        "memo": "Base Proficiency Bonus",
+        "description": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
+      },
+      {
+        "modifier": "hit_die",
+        "value": "10",
+        "memo": "Hit Dice",
+        "description": "1d10 per fighter level"
+      },
+      {
+        "modifier": "armor_proficiency",
+        "value": "all",
+        "memo": "All Armor Proficiency"
+      },
+      {
+        "modifier": "armor_proficiency",
+        "value": "shield",
+        "memo": "Shield Proficiency"
+      },
+      {
+        "modifier": "weapon_proficiency",
+        "value": "simple",
+        "memo": "Simple Weapon Proficiency"
+      },
+      {
+        "modifier": "weapon_proficiency",
+        "value": "martial",
+        "memo": "Martial Weapon Proficiency"
+      },
+      {
+        "modifier": "saving_throw",
+        "value": "str",
+        "memo": "Saving Throw"
+      },
+      {
+        "modifier": "saving_throw",
+        "value": "con",
+        "memo": "Saving Throw"
+      }
+    ]
+  }
+}

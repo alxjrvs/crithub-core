@@ -18,6 +18,25 @@ class Character < ActiveRecord::Base
   has_many :mods
   has_many :levels
 
+  validates :race, presence: true
+
+  def regenerate!
+    static_mods.destroy_all
+    case race
+    when"Human"
+      hash = JSON.parse(File.read("#{Rails.root}/data/human.json"))
+      apply(hash)
+    end
+
+    levels.each do |l|
+      case l.class_name
+      when"Fighter"
+        hash = JSON.parse(File.read("#{Rails.root}/data/fighter.json"))
+        apply(hash[l.number.to_s])
+      end
+    end
+  end
+
   def apply(hash)
     hash["mods"].each do |m| 
       digest_mod mod: m, 
@@ -85,7 +104,8 @@ class Character < ActiveRecord::Base
       character: self,
       value: mod["value"],
       memo: mod["memo"],
-      modifier: mod["modifier"]
+      modifier: mod["modifier"],
+      description: mod["description"]
     )
     mod.destroy if mod.present?
   end
@@ -96,7 +116,8 @@ class Character < ActiveRecord::Base
       character: self,
       value: mod["value"],
       memo: mod["memo"],
-      modifier: mod["modifier"]
+      modifier: mod["modifier"],
+      description: mod["description"]
     )
   end
 
@@ -109,6 +130,10 @@ class Character < ActiveRecord::Base
       pluck(:value).
       map(&:to_i).
       inject(:+)
+  end
+
+  def static_mods
+    mods.where(dynamic: false)
   end
 
   def mods_for(modifier)
