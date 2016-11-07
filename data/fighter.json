@@ -57,6 +57,21 @@
         "value": "con",
         "memo": "Saving Throw"
       }
-    ]
+    ],
+    "choices": {
+      "Fighting Style": {
+        "Archery": {
+          "mods": [
+            {
+              "modifier": "ranged_attack",
+              "value": "2",
+              "memo": "Archery",
+              "dynamic": true,
+              "description": "You gain a +2 bonus to attack rolls you make with ranged weapons"
+            }
+          ]
+        }
+      }
+    }
   }
 }
