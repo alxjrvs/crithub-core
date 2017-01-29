@@ -15,10 +15,9 @@ class Character < ActiveRecord::Base
     CHA,
   ]
 
-  has_many :mods
-  has_many :levels
-
-  validates :race, presence: true
+  has_many :mods, inverse_of: :character
+  has_many :levels, inverse_of: :character
+  accepts_nested_attributes_for :levels, :mods
 
   def regenerate!
     static_mods.destroy_all

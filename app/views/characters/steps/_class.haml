@@ -1,0 +1,9 @@
+%h1 Choose A Class!
+
+= form_for @character do |f|
+  = f.fields_for :levels do |lf|
+    = lf.radio_button :class_name, 'Fighter'
+    = label :class_name_Fighter, "Fighter"
+    = lf.hidden_field :number, value: 1
+  = f.hidden_field :next_step, value: "stats"
+  = f.submit

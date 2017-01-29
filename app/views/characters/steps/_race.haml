@@ -1,0 +1,7 @@
+%h1 Choose A Race!
+
+= form_for @character do |f|
+  = f.radio_button :race, 'Human'
+  = label :race_Human, "Human"
+  = f.hidden_field :next_step, value: "class"
+  = f.submit

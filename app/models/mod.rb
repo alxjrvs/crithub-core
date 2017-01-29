@@ -9,11 +9,10 @@ class Mod < ActiveRecord::Base
     RACIAL_TRAIT
   ].freeze
 
-  belongs_to :character
+  belongs_to :character, inverse_of: :mods
 
   validates :source, inclusion: { in: ALLOWED_SOURCES }, presence: true
   validates :modifier, presence: true
   validates :value, presence: true
-  validates :memo, presence: true
 
 end
