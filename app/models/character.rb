@@ -72,11 +72,7 @@ class Character < ActiveRecord::Base
   end
 
   def ac
-    if !armor
-      10 + dex_mod
-    else
-      armor.ac
-    end
+    ACCalculator.new(self).calculate_ac
   end
 
   def proficiency_bonus
@@ -93,6 +89,14 @@ class Character < ActiveRecord::Base
 
   def languages
     mods_for "language"
+  end
+
+  def armor
+    mods_for("armor").first
+  end
+
+  def shield
+    mods_for("shield").first
   end
 
   private
@@ -118,10 +122,6 @@ class Character < ActiveRecord::Base
       modifier: mod["modifier"],
       description: mod["description"]
     )
-  end
-
-  def armor
-    false
   end
 
   def numeric_value_for(modifier)
